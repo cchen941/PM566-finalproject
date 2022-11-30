@@ -169,10 +169,7 @@ The second figure is the bar chart of death cases by age group, also colored by 
   * How to analyze the gender factor more effectively?
   
   
-  * Have tried to make maps but didn't work well. 
-  
-  
-  * Try more interactive plots like scatter,heat map. Perform interactive tables. 
+  * Try more interactive plots like map,scatter,heat map. Perform interactive tables. 
   
   
   
