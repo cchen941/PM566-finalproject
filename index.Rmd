@@ -10,6 +10,7 @@ output:
 
 This is PM566 final project website. 
 Click to [Download the Report](https://github.com/cchen941/PM566-finalproject/blob/main/FinalReport.html)
+Clik to [View the Dataset](https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku)
 
 <br>
 
@@ -64,6 +65,13 @@ The objective of this project is to explore the answer to questions below:
 * Does the number of COVID-19 deaths vary by sex and age?
   
 
+## Data Preparation
+
+*  Drop the irregular value.
+
+*  Filter the summary rows.
+
+*  Separate columns to make the variable clear.
 
 ## Interacitve Visualizations
 
