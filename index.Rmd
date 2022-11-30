@@ -163,12 +163,17 @@ The first chart shows the histogram distributions for death cases under 1000. It
 
 The second figure is the bar chart of death cases by age group, also colored by sex. It can be seen from this figure that the number of death cases shows an apparent increasing trend with the increasing age.
 
-## Some questions.
+## Some Discussion
 
 
   * How to analyze the gender factor more effectively?
   
   
   * Have tried to make maps but didn't work well. 
+  
+  
+  * Try more interactive plots like scatter,heat map. Perform interactive tables. 
+  
+  
   
   
