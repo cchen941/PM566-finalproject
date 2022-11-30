@@ -7,19 +7,22 @@ output:
         toc_float: TRUE
 ---
 
-This is PM566 final project website for CHEN CHEN. 
-Click to [Download the Report]()
+
+This is PM566 final project website. 
+Click to [Download the Report](https://github.com/cchen941/PM566-finalproject/blob/main/FinalReport.html)
 
 <br>
 
 
 ```{r setup, message=FALSE, echo=FALSE, warning=FALSE}
 library(data.table)
+library(lubridate)
 library(tidyverse)
 library(dplyr)
 library(plotly)
 library(DT)
 library(knitr)
+data <- data.table::fread("Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 
 # Initialize code chunk options
 opts_chunk$set(
@@ -34,3 +37,128 @@ opts_chunk$set(
   out.width = "700px")
 ```
 
+```{css, echo = FALSE}
+.code-r { /* Code block */
+  font-size: 15px;
+}
+
+.code-r-small { /* Code block */
+  font-s
+  ize: 10px;
+}
+```
+
+## Brief Description
+As we know, most people infected with COVID-19 will experience mild to moderate respiratory illness and recover without requiring special treatment. However, some will become seriously ill or die at any age. The data set of this project is from CDC (Centers for Disease Control and Prevention) and talks about provisional COVID-19 deaths in United States by date, state, sex and age groups.
+
+
+The objective of this project is to explore the answer to questions below: 
+
+
+* Does the number of COVID-19 deaths change by date? 
+
+
+* Does the COVID-19 death cases change over date in different states?
+
+
+* Does the number of COVID-19 deaths vary by sex and age?
+  
+
+
+## Interacitve Visualizations
+
+```{r format the data, echo=FALSE, warning=FALSE}
+data1<- filter(data, Group == "By Month", State != "United States", Sex == "All Sexes", `Age Group` == "All Ages")
+data1$`End Date` <- as.Date(data1$`End Date`, format="%m/%d/%Y")
+```
+
+```{r plot1, class.source="code-r-small", echo=FALSE, warning=FALSE}
+p1 <- ggplot(data1, aes(x= `End Date`, y= `COVID-19 Deaths`, color = State)) + geom_line()+ geom_point(size= 0.5, alpha =0.5)
+p1 <- ggplotly(p1)
+```
+
+```{r plot2, class.source="code-r-small", echo=FALSE, warning=FALSE}
+data2 <- data1 %>% dplyr::filter(`End Date` <= "2021-12-31")
+p2 <- ggplot(data2, aes(x= `End Date`, y= `COVID-19 Deaths`, color = State)) + geom_line()+ geom_point(size= 0.5, alpha =0.5)
+p2<-ggplotly(p2)
+```
+
+
+
+
+### Line graphs of COVID-19 deaths by dates and states.{.tabset}
+
+
+#### From Jan.2020 to Nov.2022
+```{r p1, echo=FALSE}
+p1
+```
+
+#### Focus on 2020-2021
+```{r p2, echo=FALSE} 
+p2
+```
+## {-}
+
+<br>
+
+
+The first chart is the line graph of COVID-19 deaths by dates throughout 3 years. It can be clearly seen from the figure that death cases increased in 2020-2021, and began to decrease after 2021. For each year, the change in death cases is cyclical, with the highest point appearing in January 2021.
+
+
+The second chart focuses on the 2020-2021 year, with more death cases in this stage and we can also take a closer look at the distribution by different states. It is shown that by July 2020, the peak of death cases mainly occurred near New York State. However, by entering 2021, the death cases in California began to increase rapidly and reached the highest peak. After July 2021, Florida became the state with the largest number of deaths although the overall number of deaths cases decline.
+
+<br>
+
+```{r echo=FALSE, warning=FALSE}
+data3<- filter(data, Group == "By Total",State != "United States", Sex != "All Sexes", `Age Group` != "All Ages", `COVID-19 Deaths` < 1000, `COVID-19 Deaths` > 0)
+```
+
+```{r echo=FALSE, warning=FALSE}
+p3 <- data3 %>% ggplot(aes(x=`COVID-19 Deaths`, fill= Sex)) + geom_histogram(binwidth=10)
+p3 <- ggplotly(p3)
+```
+
+
+```{r echo=FALSE, warning=FALSE}
+data4<- filter(data, Group == "By Total",State != "United States", Sex != "All Sexes", `Age Group` != "All Ages", `COVID-19 Deaths` > 0, `Age Group` != "Under 1 year", `Age Group` != "0-17 years")
+p4<-data4 %>% 
+ggplot(aes(x=`COVID-19 Deaths`,y=`Age Group`,fill=Sex))+ geom_col()
+p4 <- ggplotly(p4)
+```
+
+
+
+### Exploration of the relationship between death cases and sex&age.{.tabset}
+
+
+#### Histogrom of Death Cases under 1000
+```{r p3, echo=FALSE}
+p3
+```
+
+
+
+#### Barchart of Death Cases by Age Groups
+```{r p4, echo=FALSE} 
+p4
+```
+## {-}
+
+<br>
+
+
+The first chart shows the histogram distributions for death cases under 1000. It shows that most of the counts are under 250 cases. I differentiate gender in each histogram by color, but from the graph, I can't find an apparent regulation that the number of death cases is related to gender.
+
+
+The second figure is the bar chart of death cases by age group, also colored by sex. It can be seen from this figure that the number of death cases shows an apparent increasing trend with the increasing age. But still no clear findings about gender in this graph.
+
+## Some questions.
+
+
+  * How to analyze the gender factor more effectively?
+  
+  
+  * Have tried to make maps but didn't work well. 
+  
+  

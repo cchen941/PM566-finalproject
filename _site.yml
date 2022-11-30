@@ -12,6 +12,6 @@ navbar:
       href: https://uscbiostats.github.io/PM566/
 output:
   html_document:
-    theme: paper
+    theme: flatly
     include:
     css: styles.css
