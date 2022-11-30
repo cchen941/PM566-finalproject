@@ -161,7 +161,7 @@ p4
 The first chart shows the histogram distributions for death cases under 1000. It shows that most of the counts are under 250 cases. I differentiate gender in each histogram by color, but from the graph, I can't find an apparent regulation that the number of death cases is related to gender.
 
 
-The second figure is the bar chart of death cases by age group, also colored by sex. It can be seen from this figure that the number of death cases shows an apparent increasing trend with the increasing age. But still no clear findings about gender in this graph.
+The second figure is the bar chart of death cases by age group, also colored by sex. It can be seen from this figure that the number of death cases shows an apparent increasing trend with the increasing age.
 
 ## Some questions.
 
