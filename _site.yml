@@ -5,6 +5,8 @@ navbar:
   left:
     - text: "Home"
       href: index.html
+    - text: "Midterm Output"
+      href: midterm.html
   right:
     - icon: fa-github fa-lg
       href: https://github.com/USCbiostats/PM566
@@ -14,4 +16,5 @@ output:
   html_document:
     theme: flatly
     include:
+      after_body: footer.html
     css: styles.css

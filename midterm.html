@@ -1,0 +1,1115 @@
+<!DOCTYPE html>
+
+<html>
+
+<head>
+
+<meta charset="utf-8" />
+<meta name="generator" content="pandoc" />
+<meta http-equiv="X-UA-Compatible" content="IE=EDGE" />
+
+
+<meta name="author" content="Chen Chen 6381370662" />
+
+<meta name="date" content="2022-12-02" />
+
+<title>PM566-Midterm</title>
+
+<script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
+<script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<link href="site_libs/bootstrap-3.3.5/css/flatly.min.css" rel="stylesheet" />
+<script src="site_libs/bootstrap-3.3.5/js/bootstrap.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/html5shiv.min.js"></script>
+<script src="site_libs/bootstrap-3.3.5/shim/respond.min.js"></script>
+<style>h1 {font-size: 34px;}
+       h1.title {font-size: 38px;}
+       h2 {font-size: 30px;}
+       h3 {font-size: 24px;}
+       h4 {font-size: 18px;}
+       h5 {font-size: 16px;}
+       h6 {font-size: 12px;}
+       code {color: inherit; background-color: rgba(0, 0, 0, 0.04);}
+       pre:not([class]) { background-color: white }</style>
+<script src="site_libs/navigation-1.1/tabsets.js"></script>
+<link href="site_libs/highlightjs-9.12.0/default.css" rel="stylesheet" />
+<script src="site_libs/highlightjs-9.12.0/highlight.js"></script>
+<link href="site_libs/font-awesome-5.1.0/css/all.css" rel="stylesheet" />
+<link href="site_libs/font-awesome-5.1.0/css/v4-shims.css" rel="stylesheet" />
+
+<style type="text/css">
+  code{white-space: pre-wrap;}
+  span.smallcaps{font-variant: small-caps;}
+  span.underline{text-decoration: underline;}
+  div.column{display: inline-block; vertical-align: top; width: 50%;}
+  div.hanging-indent{margin-left: 1.5em; text-indent: -1.5em;}
+  ul.task-list{list-style: none;}
+    </style>
+
+<style type="text/css">code{white-space: pre;}</style>
+<script type="text/javascript">
+if (window.hljs) {
+  hljs.configure({languages: []});
+  hljs.initHighlightingOnLoad();
+  if (document.readyState && document.readyState === "complete") {
+    window.setTimeout(function() { hljs.initHighlighting(); }, 0);
+  }
+}
+</script>
+
+
+
+
+
+
+<link rel="stylesheet" href="styles.css" type="text/css" />
+
+
+
+<style type = "text/css">
+.main-container {
+  max-width: 940px;
+  margin-left: auto;
+  margin-right: auto;
+}
+img {
+  max-width:100%;
+}
+.tabbed-pane {
+  padding-top: 12px;
+}
+.html-widget {
+  margin-bottom: 20px;
+}
+button.code-folding-btn:focus {
+  outline: none;
+}
+summary {
+  display: list-item;
+}
+details > summary > p:only-child {
+  display: inline;
+}
+pre code {
+  padding: 0;
+}
+</style>
+
+
+<style type="text/css">
+.dropdown-submenu {
+  position: relative;
+}
+.dropdown-submenu>.dropdown-menu {
+  top: 0;
+  left: 100%;
+  margin-top: -6px;
+  margin-left: -1px;
+  border-radius: 0 6px 6px 6px;
+}
+.dropdown-submenu:hover>.dropdown-menu {
+  display: block;
+}
+.dropdown-submenu>a:after {
+  display: block;
+  content: " ";
+  float: right;
+  width: 0;
+  height: 0;
+  border-color: transparent;
+  border-style: solid;
+  border-width: 5px 0 5px 5px;
+  border-left-color: #cccccc;
+  margin-top: 5px;
+  margin-right: -10px;
+}
+.dropdown-submenu:hover>a:after {
+  border-left-color: #adb5bd;
+}
+.dropdown-submenu.pull-left {
+  float: none;
+}
+.dropdown-submenu.pull-left>.dropdown-menu {
+  left: -100%;
+  margin-left: 10px;
+  border-radius: 6px 0 6px 6px;
+}
+</style>
+
+<script type="text/javascript">
+// manage active state of menu based on current page
+$(document).ready(function () {
+  // active menu anchor
+  href = window.location.pathname
+  href = href.substr(href.lastIndexOf('/') + 1)
+  if (href === "")
+    href = "index.html";
+  var menuAnchor = $('a[href="' + href + '"]');
+
+  // mark the anchor link active (and if it's in a dropdown, also mark that active)
+  var dropdown = menuAnchor.closest('li.dropdown');
+  if (window.bootstrap) { // Bootstrap 4+
+    menuAnchor.addClass('active');
+    dropdown.find('> .dropdown-toggle').addClass('active');
+  } else { // Bootstrap 3
+    menuAnchor.parent().addClass('active');
+    dropdown.addClass('active');
+  }
+
+  // Navbar adjustments
+  var navHeight = $(".navbar").first().height() + 15;
+  var style = document.createElement('style');
+  var pt = "padding-top: " + navHeight + "px; ";
+  var mt = "margin-top: -" + navHeight + "px; ";
+  var css = "";
+  // offset scroll position for anchor links (for fixed navbar)
+  for (var i = 1; i <= 6; i++) {
+    css += ".section h" + i + "{ " + pt + mt + "}\n";
+  }
+  style.innerHTML = "body {" + pt + "padding-bottom: 40px; }\n" + css;
+  document.head.appendChild(style);
+});
+</script>
+
+<!-- tabsets -->
+
+<style type="text/css">
+.tabset-dropdown > .nav-tabs {
+  display: inline-table;
+  max-height: 500px;
+  min-height: 44px;
+  overflow-y: auto;
+  border: 1px solid #ddd;
+  border-radius: 4px;
+}
+
+.tabset-dropdown > .nav-tabs > li.active:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li.active:before {
+  content: "&#xe258;";
+  border: none;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open:before {
+  content: "";
+  font-family: 'Glyphicons Halflings';
+  display: inline-block;
+  padding: 10px;
+  border-right: 1px solid #ddd;
+}
+
+.tabset-dropdown > .nav-tabs > li.active {
+  display: block;
+}
+
+.tabset-dropdown > .nav-tabs > li > a,
+.tabset-dropdown > .nav-tabs > li > a:focus,
+.tabset-dropdown > .nav-tabs > li > a:hover {
+  border: none;
+  display: inline-block;
+  border-radius: 4px;
+  background-color: transparent;
+}
+
+.tabset-dropdown > .nav-tabs.nav-tabs-open > li {
+  display: block;
+  float: none;
+}
+
+.tabset-dropdown > .nav-tabs > li {
+  display: none;
+}
+</style>
+
+<!-- code folding -->
+
+
+
+
+</head>
+
+<body>
+
+
+<div class="container-fluid main-container">
+
+
+
+
+<div class="navbar navbar-default  navbar-fixed-top" role="navigation">
+  <div class="container">
+    <div class="navbar-header">
+      <button type="button" class="navbar-toggle collapsed" data-toggle="collapse" data-bs-toggle="collapse" data-target="#navbar" data-bs-target="#navbar">
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+        <span class="icon-bar"></span>
+      </button>
+      <a class="navbar-brand" href="index.html">PM566 Final Project</a>
+    </div>
+    <div id="navbar" class="navbar-collapse collapse">
+      <ul class="nav navbar-nav">
+        <li>
+  <a href="index.html">Home</a>
+</li>
+<li>
+  <a href="midterm.html">Midterm Output</a>
+</li>
+      </ul>
+      <ul class="nav navbar-nav navbar-right">
+        <li>
+  <a href="https://github.com/USCbiostats/PM566">
+    <span class="fa fa-github fa-lg"></span>
+     
+  </a>
+</li>
+<li>
+  <a href="https://uscbiostats.github.io/PM566/">PM566 Home</a>
+</li>
+      </ul>
+    </div><!--/.nav-collapse -->
+  </div><!--/.container -->
+</div><!--/.navbar -->
+
+<div id="header">
+
+
+
+<h1 class="title toc-ignore">PM566-Midterm</h1>
+<h4 class="author">Chen Chen 6381370662</h4>
+<h4 class="date">2022-12-02</h4>
+
+</div>
+
+
+<p><strong>Introduction</strong></p>
+<p>Coronavirus disease (COVID-19) is an infectious disease caused by the
+SARS-CoV-2 virus.Most people infected with the virus will experience
+mild to moderate respiratory illness and recover without requiring
+special treatment. However, some will become seriously ill and require
+medical attention. Anyone can get sick with COVID-19 and become
+seriously ill or die at any age[1]. This project aimed to discover the
+US death data of this disease, including the exploratory data analysis
+about different variables – state, sex, age, pneumonia death, and
+influenza death. It is significant to find the relationship between
+these variables and fatalities. Exploring the regularity and
+distribution of these data may be more conducive to the study of the
+death rate of this disease.</p>
+<p><strong>Methods</strong></p>
+<p>The data is downloaded from the database of Centers for Disease
+Control and Prevention (<a
+href="https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku"
+class="uri">https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku</a>).
+The data introduce provisional COVID-19 deaths by sex and age from
+January 1st, 2020 to October 8th, 2022. Deaths involving coronavirus
+disease 2019 (COVID-19), pneumonia, and influenza were reported to NCHS
+by sex, age group, and jurisdiction of occurrence[2]. Read data with
+data.table::fread().</p>
+<pre class="r"><code>library(data.table)
+data &lt;- data.table::fread(&quot;Provisional_COVID-19_Deaths_by_Sex_and_Age.csv&quot;)</code></pre>
+<p>Perform basic overview into the data.</p>
+<pre class="r"><code>dim(data)</code></pre>
+<pre><code>## [1] 107406     16</code></pre>
+<p>It indicates that the data has 104652 rows and 16 columns. Use str()
+to check those variables. It has character variables: Data As Of- Date
+of analysis, Start Date- First date of data period, End Date-<br />
+Last date of data period, Group- Indicator of whether data measured by
+Month, by Year, or Total, State- Jurisdiction of occurrence, Sex, Age
+Group, Footnote-Suppressed counts (1-9), and integer variables: Year-
+Year in which death occurred, Month- Month in which death occurred,
+COVID-19 Deaths- Deaths involving COVID-19 (ICD-code U07.1), Total
+Deaths- Deaths from all causes of death, Pneumonia Deaths- Pneumonia
+Deaths (ICD-10 codes J12.0-J18.9), Pneumonia and COVID-19 Deaths-<br />
+Deaths with Pneumonia and COVID-19, Influenza Deaths and Pneumonia,
+Influenza, or COVID-19 Deaths- Deaths with Pneumonia, Influenza, or
+COVID-19.</p>
+<p>Then operate data cleaning and wrangling. Begin with library
+packages- lubridate, tidyverse and dtplyr.</p>
+<pre class="r"><code>library(lubridate)
+library(tidyverse)
+library(dtplyr)</code></pre>
+<p>We find that the data is composed of two parts: grouped by total and
+grouped by month. For the convenience of future analytics, we only take
+the group by-month part.</p>
+<pre class="r"><code>data &lt;- data[!is.na(Month)]
+data &lt;- data[!is.na(Year)]</code></pre>
+<p>*It is noticed that as we have some NA in COVID-19 Deaths, Total
+Deaths, Pneumonia and COVID-19 Deaths, Pneumonia and COVID-19 Deaths,
+Influenza Deaths and Pneumonia, Influenza, or COVID-19 Deaths part. We
+can check their proportion first.</p>
+<pre class="r"><code>ratio1 = sum(is.na(data$`COVID-19 Deaths`))/sum(complete.cases(data$`COVID-19 Deaths`))
+ratio2 = sum(is.na(data$`Total Deaths`))/sum(complete.cases(data$`Total Deaths`))
+ratio3 = sum(is.na(data$`Pneumonia Deaths`))/sum(complete.cases(data$`Pneumonia Deaths`))
+ratio4 = sum(is.na(data$`Pneumonia and COVID-19 Deaths`))/sum(complete.cases(data$`Pneumonia and COVID-19 Deaths`))
+ratio5 = sum(is.na(data$`Influenza Deaths`))/sum(complete.cases(data$`Influenza Deaths`))
+ratio6 = sum(is.na(data$`Pneumonia, Influenza, or COVID-19 Deaths`))/sum(complete.cases(data$`Pneumonia, Influenza, or COVID-19 Deaths`))
+c(ratio1,ratio2,ratio3,ratio4,ratio5,ratio6)%&gt;%
+knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">x</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">0.3910095</td>
+</tr>
+<tr class="even">
+<td align="right">0.1873175</td>
+</tr>
+<tr class="odd">
+<td align="right">0.4768792</td>
+</tr>
+<tr class="even">
+<td align="right">0.3700908</td>
+</tr>
+<tr class="odd">
+<td align="right">0.1764347</td>
+</tr>
+<tr class="even">
+<td align="right">0.4691358</td>
+</tr>
+</tbody>
+</table>
+<p>From the result shown above, the NA proportion is over 10%. We cannot
+delete them directly.</p>
+<p>To find the proportion of death due to COVID-19 in total number of
+death. We add a new variable called “COVID-19 Death/Total”.</p>
+<pre class="r"><code>COVID_Death_Proportion &lt;- data$`COVID-19 Deaths`/data$`Total Deaths`
+data &lt;- cbind(data, COVID_Death_Proportion)</code></pre>
+<p>The next step is to build up some exploratory graphs. We look at some
+of the key variables first and build up more in the next section.</p>
+<pre class="r"><code>plot(
+  data$Month, data$`COVID-19 Deaths`, pch=20, cex=2,
+  main = &quot;Plot of COVID-19 Deaths and Month&quot;,
+  xlab= &quot;Month&quot;, ylab=&quot;COVID-19 Deaths&quot;)</code></pre>
+<p><img src="midterm_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+<p>For the plot shown above, the dots show the distribution of one of
+the key variables- Covid-19 death by month. The figure shows that the
+number of covid-19 deaths has higher values at the beginning and the end
+of years (approximately in winter) and lower values in the middle of
+years. Surely we will have a more detailed visualization analysis of the
+data later below.</p>
+<p><strong>Preliminary Result</strong> We are going to perform some
+visualization to explore the data set. The figures are about key
+variables we focus on and find out the regulation and distribution.</p>
+<pre class="r"><code>library(ggplot2)</code></pre>
+<p>We can discover the variables about year and month. First, we did a
+summary of the average covid death cases, and covid proportion each
+year.</p>
+<pre class="r"><code>data %&gt;% group_by(Year)%&gt;%
+  summarise(
+    Avg_covid_death  =mean(`COVID-19 Deaths`, na.rm= TRUE),
+    Avg_covid_proportion = mean(COVID_Death_Proportion, na.rm =TRUE)
+  )%&gt;%
+knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="right">Year</th>
+<th align="right">Avg_covid_death</th>
+<th align="right">Avg_covid_proportion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="right">2020</td>
+<td align="right">132.77462</td>
+<td align="right">0.0642793</td>
+</tr>
+<tr class="even">
+<td align="right">2021</td>
+<td align="right">180.12917</td>
+<td align="right">0.1101580</td>
+</tr>
+<tr class="odd">
+<td align="right">2022</td>
+<td align="right">96.48408</td>
+<td align="right">0.0568177</td>
+</tr>
+</tbody>
+</table>
+<p>From the summary table, the average number of death cases caused by
+Covid has decreased by year. However, the proportion of Covid-19 seems
+higher in 2021 than in 2020 and then goes back to around 6% in 2022.
+Next step, we build up a violin plot to show the Covid-19 proportion
+distribution by year.</p>
+<pre class="r"><code>data%&gt;%
+  ggplot()+geom_violin(mapping = aes(x=1, y=COVID_Death_Proportion, color=Year, fill=Year))+ facet_wrap(~Year)+ggtitle(&quot;Violin Plots of Covid-19 Death Proportion by Year&quot;)</code></pre>
+<pre><code>## Warning: Removed 43367 rows containing non-finite values (stat_ydensity).</code></pre>
+<p><img src="midterm_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+<p>It shows that the highest proportion was reported in 2020 and
+decreased by year, which is comply with the regulation of the table
+presentation above.</p>
+<p>We go on with the sex variable and do some summary first.</p>
+<pre class="r"><code>data %&gt;% group_by(Sex)%&gt;%
+  summarise(
+    Avg_covid_death  =mean(`COVID-19 Deaths`, na.rm= TRUE),
+    Avg_covid_proportion = mean(COVID_Death_Proportion, na.rm =TRUE)
+  )%&gt;%
+knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Sex</th>
+<th align="right">Avg_covid_death</th>
+<th align="right">Avg_covid_proportion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">All Sexes</td>
+<td align="right">205.70300</td>
+<td align="right">0.0762266</td>
+</tr>
+<tr class="even">
+<td align="left">Female</td>
+<td align="right">91.91869</td>
+<td align="right">0.0805664</td>
+</tr>
+<tr class="odd">
+<td align="left">Male</td>
+<td align="right">116.03263</td>
+<td align="right">0.0783782</td>
+</tr>
+</tbody>
+</table>
+<p>From the table, male has a higher average than female in Covid-19
+death cases but their proportion of death are similar. For deeper
+analysis, we use stat_summay to examine mean death cases by sex with
+standard deviation error bars.</p>
+<pre class="r"><code>  data[!is.na(`COVID-19 Deaths`)]%&gt;%
+  ggplot(mapping = aes(x= `Sex`, y= `COVID-19 Deaths` ))+
+  stat_summary(fun.data = mean_sdl, geom= &quot;pointrange&quot;)+
+  stat_summary(fun.data = mean_sdl, geom= &quot;errorbar&quot;)+ggtitle(&quot;Summary Statistics of Covid-19 Death by Sex&quot;)</code></pre>
+<p><img src="midterm_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p>The plots show that the male group, which holds a higher average case
+number, has a wider range of bars. In this case, they also have a larger
+standard deviation in death cases caused by Covid-19.</p>
+<p>The next step is states, we build up a summary table for average
+death cases and proportion by the state like before and arrange it by
+descending order of cases. Texas has the most number of cases.</p>
+<pre class="r"><code>data %&gt;% group_by(State)%&gt;%
+  summarise(
+    Avg_covid_death  =mean(`COVID-19 Deaths`, na.rm= TRUE),
+    Avg_covid_proportion = mean(COVID_Death_Proportion, na.rm =TRUE)
+  )%&gt;%arrange(desc(Avg_covid_death))%&gt;%
+knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">State</th>
+<th align="right">Avg_covid_death</th>
+<th align="right">Avg_covid_proportion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">United States</td>
+<td align="right">2703.024090</td>
+<td align="right">0.0685317</td>
+</tr>
+<tr class="even">
+<td align="left">Texas</td>
+<td align="right">339.349450</td>
+<td align="right">0.1074259</td>
+</tr>
+<tr class="odd">
+<td align="left">California</td>
+<td align="right">329.321530</td>
+<td align="right">0.0811933</td>
+</tr>
+<tr class="even">
+<td align="left">Florida</td>
+<td align="right">251.229304</td>
+<td align="right">0.0783551</td>
+</tr>
+<tr class="odd">
+<td align="left">Pennsylvania</td>
+<td align="right">164.959356</td>
+<td align="right">0.0753892</td>
+</tr>
+<tr class="even">
+<td align="left">Ohio</td>
+<td align="right">154.023485</td>
+<td align="right">0.0744282</td>
+</tr>
+<tr class="odd">
+<td align="left">New York</td>
+<td align="right">134.940989</td>
+<td align="right">0.0848920</td>
+</tr>
+<tr class="even">
+<td align="left">New York City</td>
+<td align="right">125.779070</td>
+<td align="right">0.1028783</td>
+</tr>
+<tr class="odd">
+<td align="left">Illinois</td>
+<td align="right">120.731781</td>
+<td align="right">0.0751669</td>
+</tr>
+<tr class="even">
+<td align="left">Georgia</td>
+<td align="right">118.219880</td>
+<td align="right">0.0863119</td>
+</tr>
+<tr class="odd">
+<td align="left">Michigan</td>
+<td align="right">117.787972</td>
+<td align="right">0.0799725</td>
+</tr>
+<tr class="even">
+<td align="left">New Jersey</td>
+<td align="right">110.636567</td>
+<td align="right">0.0916264</td>
+</tr>
+<tr class="odd">
+<td align="left">North Carolina</td>
+<td align="right">107.541445</td>
+<td align="right">0.0735949</td>
+</tr>
+<tr class="even">
+<td align="left">Arizona</td>
+<td align="right">97.564626</td>
+<td align="right">0.1047428</td>
+</tr>
+<tr class="odd">
+<td align="left">Tennessee</td>
+<td align="right">94.705357</td>
+<td align="right">0.0785762</td>
+</tr>
+<tr class="even">
+<td align="left">Indiana</td>
+<td align="right">87.794118</td>
+<td align="right">0.0805142</td>
+</tr>
+<tr class="odd">
+<td align="left">Missouri</td>
+<td align="right">75.112150</td>
+<td align="right">0.0747855</td>
+</tr>
+<tr class="even">
+<td align="left">Virginia</td>
+<td align="right">73.203602</td>
+<td align="right">0.0679021</td>
+</tr>
+<tr class="odd">
+<td align="left">Alabama</td>
+<td align="right">70.574942</td>
+<td align="right">0.0862706</td>
+</tr>
+<tr class="even">
+<td align="left">South Carolina</td>
+<td align="right">67.486296</td>
+<td align="right">0.0836647</td>
+</tr>
+<tr class="odd">
+<td align="left">Massachusetts</td>
+<td align="right">66.011981</td>
+<td align="right">0.0629065</td>
+</tr>
+<tr class="even">
+<td align="left">Louisiana</td>
+<td align="right">61.187958</td>
+<td align="right">0.0861103</td>
+</tr>
+<tr class="odd">
+<td align="left">Oklahoma</td>
+<td align="right">60.772943</td>
+<td align="right">0.1012956</td>
+</tr>
+<tr class="even">
+<td align="left">Kentucky</td>
+<td align="right">59.831741</td>
+<td align="right">0.0773255</td>
+</tr>
+<tr class="odd">
+<td align="left">Maryland</td>
+<td align="right">57.433176</td>
+<td align="right">0.0755111</td>
+</tr>
+<tr class="even">
+<td align="left">Wisconsin</td>
+<td align="right">53.285377</td>
+<td align="right">0.0641920</td>
+</tr>
+<tr class="odd">
+<td align="left">Colorado</td>
+<td align="right">49.444885</td>
+<td align="right">0.0774832</td>
+</tr>
+<tr class="even">
+<td align="left">Mississippi</td>
+<td align="right">48.553751</td>
+<td align="right">0.1004966</td>
+</tr>
+<tr class="odd">
+<td align="left">Minnesota</td>
+<td align="right">47.301752</td>
+<td align="right">0.0661164</td>
+</tr>
+<tr class="even">
+<td align="left">Washington</td>
+<td align="right">46.689574</td>
+<td align="right">0.0561815</td>
+</tr>
+<tr class="odd">
+<td align="left">Arkansas</td>
+<td align="right">41.017323</td>
+<td align="right">0.0825546</td>
+</tr>
+<tr class="even">
+<td align="left">Nevada</td>
+<td align="right">40.783123</td>
+<td align="right">0.1063437</td>
+</tr>
+<tr class="odd">
+<td align="left">Connecticut</td>
+<td align="right">38.960254</td>
+<td align="right">0.0746780</td>
+</tr>
+<tr class="even">
+<td align="left">Iowa</td>
+<td align="right">34.308181</td>
+<td align="right">0.0768354</td>
+</tr>
+<tr class="odd">
+<td align="left">Kansas</td>
+<td align="right">32.559322</td>
+<td align="right">0.0816172</td>
+</tr>
+<tr class="even">
+<td align="left">New Mexico</td>
+<td align="right">30.181818</td>
+<td align="right">0.1200209</td>
+</tr>
+<tr class="odd">
+<td align="left">Oregon</td>
+<td align="right">27.600939</td>
+<td align="right">0.0520466</td>
+</tr>
+<tr class="even">
+<td align="left">West Virginia</td>
+<td align="right">24.260579</td>
+<td align="right">0.0683336</td>
+</tr>
+<tr class="odd">
+<td align="left">Puerto Rico</td>
+<td align="right">19.319408</td>
+<td align="right">0.0537693</td>
+</tr>
+<tr class="even">
+<td align="left">Utah</td>
+<td align="right">19.233251</td>
+<td align="right">0.0706495</td>
+</tr>
+<tr class="odd">
+<td align="left">Nebraska</td>
+<td align="right">17.658960</td>
+<td align="right">0.0710675</td>
+</tr>
+<tr class="even">
+<td align="left">Idaho</td>
+<td align="right">17.072317</td>
+<td align="right">0.0804971</td>
+</tr>
+<tr class="odd">
+<td align="left">Rhode Island</td>
+<td align="right">11.827751</td>
+<td align="right">0.0882897</td>
+</tr>
+<tr class="even">
+<td align="left">Montana</td>
+<td align="right">11.819685</td>
+<td align="right">0.0819718</td>
+</tr>
+<tr class="odd">
+<td align="left">South Dakota</td>
+<td align="right">10.609881</td>
+<td align="right">0.0888342</td>
+</tr>
+<tr class="even">
+<td align="left">Delaware</td>
+<td align="right">9.815961</td>
+<td align="right">0.0733633</td>
+</tr>
+<tr class="odd">
+<td align="left">North Dakota</td>
+<td align="right">9.379019</td>
+<td align="right">0.0969374</td>
+</tr>
+<tr class="even">
+<td align="left">Maine</td>
+<td align="right">8.657371</td>
+<td align="right">0.0415997</td>
+</tr>
+<tr class="odd">
+<td align="left">New Hampshire</td>
+<td align="right">7.829398</td>
+<td align="right">0.0447065</td>
+</tr>
+<tr class="even">
+<td align="left">District of Columbia</td>
+<td align="right">7.121157</td>
+<td align="right">0.0744739</td>
+</tr>
+<tr class="odd">
+<td align="left">Hawaii</td>
+<td align="right">4.991694</td>
+<td align="right">0.0431187</td>
+</tr>
+<tr class="even">
+<td align="left">Wyoming</td>
+<td align="right">4.853717</td>
+<td align="right">0.0854411</td>
+</tr>
+<tr class="odd">
+<td align="left">Alaska</td>
+<td align="right">4.090678</td>
+<td align="right">0.0572232</td>
+</tr>
+<tr class="even">
+<td align="left">Vermont</td>
+<td align="right">1.545782</td>
+<td align="right">0.0175733</td>
+</tr>
+</tbody>
+</table>
+<p>To make it more clear, a bar chart is shown below. In this figure,
+Texas and California have the longest bar and Vermont has the
+shortest.</p>
+<pre class="r"><code>subset &lt;- data[!(State == &quot;United States&quot;)]
+subset[!is.na(`COVID-19 Deaths`)]%&gt;%
+  ggplot(aes(x= `COVID-19 Deaths`, y=fct_reorder(State, `COVID-19 Deaths`)))+geom_col(width = 0.5)+ggtitle(&quot;Bar Plots of Covid-19 Death by State&quot;)</code></pre>
+<p><img src="midterm_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p>Have a look at age groups. Repeat the same actions to average Covid
+deaths and proportions and arrange them by descending order of covid
+death. It is noticeable that the cases number increases with age
+increasing. The older the age group, the larger number of deaths caused
+by Covid-19. We also noticed the proportion increase, it is feasible to
+find a correlation later but it may also relate to some other
+reasons.</p>
+<pre class="r"><code>data %&gt;% group_by(`Age Group`)%&gt;%
+  summarise(
+    Avg_covid_death  =mean(`COVID-19 Deaths`, na.rm= TRUE),
+    Avg_covid_proportion = mean(COVID_Death_Proportion, na.rm =TRUE)
+  )%&gt;%arrange(desc(Avg_covid_death))%&gt;%
+knitr::kable()</code></pre>
+<table>
+<thead>
+<tr class="header">
+<th align="left">Age Group</th>
+<th align="right">Avg_covid_death</th>
+<th align="right">Avg_covid_proportion</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">All Ages</td>
+<td align="right">800.1468727</td>
+<td align="right">0.0952294</td>
+</tr>
+<tr class="even">
+<td align="left">85 years and over</td>
+<td align="right">238.2041719</td>
+<td align="right">0.0973142</td>
+</tr>
+<tr class="odd">
+<td align="left">75-84 years</td>
+<td align="right">237.5212834</td>
+<td align="right">0.1095293</td>
+</tr>
+<tr class="even">
+<td align="left">65-74 years</td>
+<td align="right">215.3342210</td>
+<td align="right">0.1148732</td>
+</tr>
+<tr class="odd">
+<td align="left">50-64 years</td>
+<td align="right">183.2101551</td>
+<td align="right">0.1128847</td>
+</tr>
+<tr class="even">
+<td align="left">55-64 years</td>
+<td align="right">149.1785714</td>
+<td align="right">0.1137297</td>
+</tr>
+<tr class="odd">
+<td align="left">45-54 years</td>
+<td align="right">80.4908710</td>
+<td align="right">0.1183402</td>
+</tr>
+<tr class="even">
+<td align="left">40-49 years</td>
+<td align="right">55.6111655</td>
+<td align="right">0.1059312</td>
+</tr>
+<tr class="odd">
+<td align="left">35-44 years</td>
+<td align="right">37.2105080</td>
+<td align="right">0.0825839</td>
+</tr>
+<tr class="even">
+<td align="left">30-39 years</td>
+<td align="right">23.7074711</td>
+<td align="right">0.0581430</td>
+</tr>
+<tr class="odd">
+<td align="left">25-34 years</td>
+<td align="right">13.4671433</td>
+<td align="right">0.0376264</td>
+</tr>
+<tr class="even">
+<td align="left">18-29 years</td>
+<td align="right">6.3843976</td>
+<td align="right">0.0174928</td>
+</tr>
+<tr class="odd">
+<td align="left">15-24 years</td>
+<td align="right">1.9261886</td>
+<td align="right">0.0057131</td>
+</tr>
+<tr class="even">
+<td align="left">0-17 years</td>
+<td align="right">0.7114606</td>
+<td align="right">0.0009138</td>
+</tr>
+<tr class="odd">
+<td align="left">5-14 years</td>
+<td align="right">0.1708683</td>
+<td align="right">0.0031606</td>
+</tr>
+<tr class="even">
+<td align="left">Under 1 year</td>
+<td align="right">0.1512473</td>
+<td align="right">0.0002411</td>
+</tr>
+<tr class="odd">
+<td align="left">1-4 years</td>
+<td align="right">0.0782543</td>
+<td align="right">0.0039161</td>
+</tr>
+</tbody>
+</table>
+<p>Perform a bar chart again to show the trend. The number of Covid-19
+deaths among older age groups is much higher than among younger age
+groups, and there is a trend of increasing with age.</p>
+<pre class="r"><code>subset2 &lt;- data[!(`Age Group` == &quot;All Ages&quot;)]
+subset2[!is.na(`COVID-19 Deaths`)]%&gt;%
+  ggplot(aes(x= `COVID-19 Deaths`, y=fct_reorder(`Age Group`, `COVID-19 Deaths`)))+geom_col(width = 0.7)+ggtitle(&quot;Bar Plots of Covid-19 Death by Age Groups&quot;)</code></pre>
+<p><img src="midterm_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+<p>We can also do some correlation analysis. The figure below shows the
+trending between the proportion of death caused by covid and the covid
+death cases. The color indicates the sex group. Different colors
+represent different sex. From the line, we cannot have a specific
+conclusion about the correlation.</p>
+<pre class="r"><code>data[!is.na(Sex)]%&gt;%
+  ggplot(mapping = aes(x=data$`COVID-19 Deaths`, y= data$COVID_Death_Proportion))+ geom_point(mapping = aes(color= Sex))+geom_smooth()+ggtitle(&quot;Plot for Covid-Proportion and Covid-Cases&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
+<pre><code>## Warning: Removed 43367 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 43367 rows containing missing values (geom_point).</code></pre>
+<p><img src="midterm_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
+<pre class="r"><code>data%&gt;%
+  ggplot(mapping = aes(x= `COVID-19 Deaths`, y=`COVID_Death_Proportion`))+geom_point(mapping = aes(color= `Age Group`))+geom_smooth(method=lm, mapping = aes(linetype= `Age Group`))+facet_wrap(~`Age Group`, nrow=5)+ggtitle(&quot;Plots for Age Group, Deaths and Proportion&quot;)</code></pre>
+<pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
+<pre><code>## Warning: Removed 43367 rows containing non-finite values (stat_smooth).</code></pre>
+<pre><code>## Warning: Removed 43367 rows containing missing values (geom_point).</code></pre>
+<p><img src="midterm_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p>This figure is another exploration of correlation by age groups. It
+indicates that among the older age groups, there might be a correlation
+between death cases and proportions. Future research is required on
+these questions.</p>
+<p>At last, we do some summary about other integer variables. Just for
+your information</p>
+<pre class="r"><code>s1 &lt;- summary(data$&#39;COVID-19 Deaths&#39;)
+s2 &lt;- summary(data$`Total Deaths`)
+s3 &lt;- summary(data$`Pneumonia Deaths`)
+s4 &lt;- summary(data$`Pneumonia and COVID-19 Deaths`)
+s5 &lt;- summary(data$`Influenza Deaths`)
+s6 &lt;- summary(data$`Pneumonia, Influenza, or COVID-19 Deaths`)
+s7 &lt;- summary(data$COVID_Death_Proportion)
+rbind(s1, s2, s3, s4, s5, s6, s7)%&gt;%
+knitr::kable()</code></pre>
+<table>
+<colgroup>
+<col width="4%" />
+<col width="6%" />
+<col width="11%" />
+<col width="16%" />
+<col width="18%" />
+<col width="16%" />
+<col width="18%" />
+<col width="8%" />
+</colgroup>
+<thead>
+<tr class="header">
+<th align="left"></th>
+<th align="right">Min.</th>
+<th align="right">1st Qu.</th>
+<th align="right">Median</th>
+<th align="right">Mean</th>
+<th align="right">3rd Qu.</th>
+<th align="right">Max.</th>
+<th align="right">NA’s</th>
+</tr>
+</thead>
+<tbody>
+<tr class="odd">
+<td align="left">s1</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.0000000</td>
+<td align="right">138.3192150</td>
+<td align="right">44.0000000</td>
+<td align="right">1.055510e+05</td>
+<td align="right">27095</td>
+</tr>
+<tr class="even">
+<td align="left">s2</td>
+<td align="right">0</td>
+<td align="right">37</td>
+<td align="right">126.0000000</td>
+<td align="right">1081.7001589</td>
+<td align="right">502.0000000</td>
+<td align="right">3.736410e+05</td>
+<td align="right">15207</td>
+</tr>
+<tr class="odd">
+<td align="left">s3</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">14.0000000</td>
+<td align="right">135.9907915</td>
+<td align="right">59.0000000</td>
+<td align="right">6.984800e+04</td>
+<td align="right">31124</td>
+</tr>
+<tr class="even">
+<td align="left">s4</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.0000000</td>
+<td align="right">68.8734667</td>
+<td align="right">20.0000000</td>
+<td align="right">5.541000e+04</td>
+<td align="right">26037</td>
+</tr>
+<tr class="odd">
+<td align="left">s5</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.0000000</td>
+<td align="right">1.1096248</td>
+<td align="right">0.0000000</td>
+<td align="right">2.437000e+03</td>
+<td align="right">14456</td>
+</tr>
+<tr class="even">
+<td align="left">s6</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">21.0000000</td>
+<td align="right">209.1407103</td>
+<td align="right">87.0000000</td>
+<td align="right">1.200700e+05</td>
+<td align="right">30780</td>
+</tr>
+<tr class="odd">
+<td align="left">s7</td>
+<td align="right">0</td>
+<td align="right">0</td>
+<td align="right">0.0436681</td>
+<td align="right">0.0782282</td>
+<td align="right">0.1222222</td>
+<td align="right">7.247243e-01</td>
+<td align="right">43367</td>
+</tr>
+</tbody>
+</table>
+<p><strong>Conclusion</strong></p>
+<p>In this project, we mainly deal with the data set describing the
+death data of Covid-19 disease by time, state, sex, and age groups. Our
+objective is to find the distribution and regulation of different
+variables versus death data. After a series of analyses, we have some
+preliminary answers to questions. The number of Covid-19 deaths is
+higher at the beginning and the end of years and lower values in the
+middle of years. We may reference the regulation related to season
+factors. The death cases increased in winter. For years, the average
+number of death cases caused by Covid-19 has decreased by year. This
+trend didn’t apply to the proportions of death caused by Covid in the
+total death numbers. The highest proportion was reported in 2020 and
+decreased by the year. With different sex, the male has a higher average
+than female in Covid-19 death cases but their proportion of death are
+similar. They also have a larger standard deviation in death cases
+caused by Covid-19. On the scope of states, Texas and California hold
+the most Covid-19 cases. For the age group, the cases number increases
+with age increasing. The older the age group, the larger number of
+deaths caused by Covid-19. We also noticed the proportion increase, it
+is feasible to find a correlation later but it may also relate to some
+other reasons. Later explore about correlations make me find
+correlations by age group. There might be a correlation between death
+cases and proportions in the older age group but future research is
+necessary.</p>
+<p><strong>Reference List</strong></p>
+<p>[1]World Health Organizations, <a
+href="https://www.who.int/health-topics/coronavirus#tab=tab_1"
+class="uri">https://www.who.int/health-topics/coronavirus#tab=tab_1</a>.</p>
+<p>[2]Centers for Disease Control and Prevention, <a
+href="https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku"
+class="uri">https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku</a>.</p>
+
+<p>Copyright &copy; 2020, Chen Chen.</p>
+
+
+
+</div>
+
+<script>
+
+// add bootstrap table styles to pandoc tables
+function bootstrapStylePandocTables() {
+  $('tr.odd').parent('tbody').parent('table').addClass('table table-condensed');
+}
+$(document).ready(function () {
+  bootstrapStylePandocTables();
+});
+
+
+</script>
+
+<!-- tabsets -->
+
+<script>
+$(document).ready(function () {
+  window.buildTabsets("TOC");
+});
+
+$(document).ready(function () {
+  $('.tabset-dropdown > .nav-tabs > li').click(function () {
+    $(this).parent().toggleClass('nav-tabs-open');
+  });
+});
+</script>
+
+<!-- code folding -->
+
+
+<!-- dynamically load mathjax for compatibility with self-contained -->
+<script>
+  (function () {
+    var script = document.createElement("script");
+    script.type = "text/javascript";
+    script.src  = "https://mathjax.rstudio.com/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML";
+    document.getElementsByTagName("head")[0].appendChild(script);
+  })();
+</script>
+
+</body>
+</html>
