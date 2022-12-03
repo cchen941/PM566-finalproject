@@ -9,7 +9,7 @@ output:
 
 
 This is PM566 final project website. 
-Click to [Download the Report](https://github.com/cchen941/PM566-finalproject/blob/main/FinalReport.html)
+Click to [Download the Report](https://github.com/cchen941/PM566-finalproject/blob/main/FinalReport.pdf)
 
 
 Click to [View the Dataset](https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku)
@@ -124,44 +124,30 @@ The second chart focuses on the 2020-2021 year, with more death cases in this st
 data3<- filter(data, Group == "By Total",State != "United States", Sex != "All Sexes", `Age Group` != "All Ages", `COVID-19 Deaths` < 1000, `COVID-19 Deaths` > 0)
 ```
 
+
+### Exploration of the relationship between death cases and sex&age.
+
+
+#### Histogrom of Death Cases under 250
 ```{r echo=FALSE, warning=FALSE}
-p3 <- data3 %>% ggplot(aes(x=`COVID-19 Deaths`, fill= Sex)) + geom_histogram(binwidth=10)
-p3 <- ggplotly(p3)
+p3 <- data3 %>% ggplot(aes(x=`COVID-19 Deaths`, fill=Sex))+ geom_histogram(binwidth = 10)
+ggplotly(p3)
 ```
-
-
-```{r echo=FALSE, warning=FALSE}
-data4<- filter(data, Group == "By Total",State != "United States", Sex != "All Sexes", `Age Group` != "All Ages", `COVID-19 Deaths` > 0, `Age Group` != "Under 1 year", `Age Group` != "0-17 years")
-p4<-data4 %>% 
-ggplot(aes(x=`COVID-19 Deaths`,y=`Age Group`,fill=Sex))+ geom_col()
-p4 <- ggplotly(p4)
-```
-
-
-
-### Exploration of the relationship between death cases and sex&age.{.tabset}
-
-
-#### Histogrom of Death Cases under 1000
-```{r p3, echo=FALSE}
-p3
-```
-
-
-
-#### Barchart of Death Cases by Age Groups
-```{r p4, echo=FALSE} 
-p4
-```
-## {-}
-
-<br>
 
 
 The first chart shows the histogram distributions for death cases under 1000. It shows that most of the counts are under 250 cases. I differentiate gender in each histogram by color, but from the graph, I can't find an apparent regulation that the number of death cases is related to gender.
 
 
-The second figure is the bar chart of death cases by age group, also colored by sex. It can be seen from this figure that the number of death cases shows an apparent increasing trend with the increasing age.
+
+#### Barchart of Death Cases by Age Groups
+```{r echo=FALSE, warning=FALSE}
+data4<- filter(data, Group == "By Total",State != "United States", Sex != "All Sexes", `Age Group` != "All Ages", `COVID-19 Deaths` > 0, `Age Group` != "Under 1 year", `Age Group` != "0-17 years")
+p4<-data4 %>% 
+ggplot(aes(x=`COVID-19 Deaths`,y=`Age Group`,fill=Sex))+ geom_col(position= "dodge")
+ggplotly(p4)
+```
+
+The second figure is the bar chart of death cases by age group, also colored by sex. It can be seen from this figure that the number of death cases shows an apparent increasing trend with the increasing age. In most age groups (except those over 85 years old), the number of deaths of male is more than that of female.
 
 ## Some Discussion
 

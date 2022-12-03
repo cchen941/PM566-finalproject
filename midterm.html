@@ -13,7 +13,7 @@
 
 <meta name="date" content="2022-12-02" />
 
-<title>PM566-Midterm</title>
+<title>midterm.knit</title>
 
 <script src="site_libs/header-attrs-2.15/header-attrs.js"></script>
 <script src="site_libs/jquery-3.6.0/jquery-3.6.0.min.js"></script>
@@ -280,9 +280,6 @@ $(document).ready(function () {
 
 
 
-<h1 class="title toc-ignore">PM566-Midterm</h1>
-<h4 class="author">Chen Chen 6381370662</h4>
-<h4 class="date">2022-12-02</h4>
 
 </div>
 
@@ -310,11 +307,6 @@ January 1st, 2020 to October 8th, 2022. Deaths involving coronavirus
 disease 2019 (COVID-19), pneumonia, and influenza were reported to NCHS
 by sex, age group, and jurisdiction of occurrence[2]. Read data with
 data.table::fread().</p>
-<pre class="r"><code>library(data.table)
-data &lt;- data.table::fread(&quot;Provisional_COVID-19_Deaths_by_Sex_and_Age.csv&quot;)</code></pre>
-<p>Perform basic overview into the data.</p>
-<pre class="r"><code>dim(data)</code></pre>
-<pre><code>## [1] 107406     16</code></pre>
 <p>It indicates that the data has 104652 rows and 16 columns. Use str()
 to check those variables. It has character variables: Data As Of- Date
 of analysis, Start Date- First date of data period, End Date-<br />
@@ -330,66 +322,14 @@ Influenza, or COVID-19 Deaths- Deaths with Pneumonia, Influenza, or
 COVID-19.</p>
 <p>Then operate data cleaning and wrangling. Begin with library
 packages- lubridate, tidyverse and dtplyr.</p>
-<pre class="r"><code>library(lubridate)
-library(tidyverse)
-library(dtplyr)</code></pre>
 <p>We find that the data is composed of two parts: grouped by total and
 grouped by month. For the convenience of future analytics, we only take
 the group by-month part.</p>
-<pre class="r"><code>data &lt;- data[!is.na(Month)]
-data &lt;- data[!is.na(Year)]</code></pre>
-<p>*It is noticed that as we have some NA in COVID-19 Deaths, Total
-Deaths, Pneumonia and COVID-19 Deaths, Pneumonia and COVID-19 Deaths,
-Influenza Deaths and Pneumonia, Influenza, or COVID-19 Deaths part. We
-can check their proportion first.</p>
-<pre class="r"><code>ratio1 = sum(is.na(data$`COVID-19 Deaths`))/sum(complete.cases(data$`COVID-19 Deaths`))
-ratio2 = sum(is.na(data$`Total Deaths`))/sum(complete.cases(data$`Total Deaths`))
-ratio3 = sum(is.na(data$`Pneumonia Deaths`))/sum(complete.cases(data$`Pneumonia Deaths`))
-ratio4 = sum(is.na(data$`Pneumonia and COVID-19 Deaths`))/sum(complete.cases(data$`Pneumonia and COVID-19 Deaths`))
-ratio5 = sum(is.na(data$`Influenza Deaths`))/sum(complete.cases(data$`Influenza Deaths`))
-ratio6 = sum(is.na(data$`Pneumonia, Influenza, or COVID-19 Deaths`))/sum(complete.cases(data$`Pneumonia, Influenza, or COVID-19 Deaths`))
-c(ratio1,ratio2,ratio3,ratio4,ratio5,ratio6)%&gt;%
-knitr::kable()</code></pre>
-<table>
-<thead>
-<tr class="header">
-<th align="right">x</th>
-</tr>
-</thead>
-<tbody>
-<tr class="odd">
-<td align="right">0.3910095</td>
-</tr>
-<tr class="even">
-<td align="right">0.1873175</td>
-</tr>
-<tr class="odd">
-<td align="right">0.4768792</td>
-</tr>
-<tr class="even">
-<td align="right">0.3700908</td>
-</tr>
-<tr class="odd">
-<td align="right">0.1764347</td>
-</tr>
-<tr class="even">
-<td align="right">0.4691358</td>
-</tr>
-</tbody>
-</table>
-<p>From the result shown above, the NA proportion is over 10%. We cannot
-delete them directly.</p>
 <p>To find the proportion of death due to COVID-19 in total number of
 death. We add a new variable called “COVID-19 Death/Total”.</p>
-<pre class="r"><code>COVID_Death_Proportion &lt;- data$`COVID-19 Deaths`/data$`Total Deaths`
-data &lt;- cbind(data, COVID_Death_Proportion)</code></pre>
 <p>The next step is to build up some exploratory graphs. We look at some
-of the key variables first and build up more in the next section.</p>
-<pre class="r"><code>plot(
-  data$Month, data$`COVID-19 Deaths`, pch=20, cex=2,
-  main = &quot;Plot of COVID-19 Deaths and Month&quot;,
-  xlab= &quot;Month&quot;, ylab=&quot;COVID-19 Deaths&quot;)</code></pre>
-<p><img src="midterm_files/figure-html/unnamed-chunk-7-1.png" width="672" /></p>
+of the key variables first and build up more in the next section.
+<img src="midterm_files/figure-html/unnamed-chunk-5-1.png" width="672" /></p>
 <p>For the plot shown above, the dots show the distribution of one of
 the key variables- Covid-19 death by month. The figure shows that the
 number of covid-19 deaths has higher values at the beginning and the end
@@ -399,16 +339,9 @@ data later below.</p>
 <p><strong>Preliminary Result</strong> We are going to perform some
 visualization to explore the data set. The figures are about key
 variables we focus on and find out the regulation and distribution.</p>
-<pre class="r"><code>library(ggplot2)</code></pre>
 <p>We can discover the variables about year and month. First, we did a
 summary of the average covid death cases, and covid proportion each
 year.</p>
-<pre class="r"><code>data %&gt;% group_by(Year)%&gt;%
-  summarise(
-    Avg_covid_death  =mean(`COVID-19 Deaths`, na.rm= TRUE),
-    Avg_covid_proportion = mean(COVID_Death_Proportion, na.rm =TRUE)
-  )%&gt;%
-knitr::kable()</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -439,21 +372,12 @@ knitr::kable()</code></pre>
 Covid has decreased by year. However, the proportion of Covid-19 seems
 higher in 2021 than in 2020 and then goes back to around 6% in 2022.
 Next step, we build up a violin plot to show the Covid-19 proportion
-distribution by year.</p>
-<pre class="r"><code>data%&gt;%
-  ggplot()+geom_violin(mapping = aes(x=1, y=COVID_Death_Proportion, color=Year, fill=Year))+ facet_wrap(~Year)+ggtitle(&quot;Violin Plots of Covid-19 Death Proportion by Year&quot;)</code></pre>
-<pre><code>## Warning: Removed 43367 rows containing non-finite values (stat_ydensity).</code></pre>
-<p><img src="midterm_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
+distribution by year.
+<img src="midterm_files/figure-html/unnamed-chunk-8-1.png" width="672" /></p>
 <p>It shows that the highest proportion was reported in 2020 and
 decreased by year, which is comply with the regulation of the table
 presentation above.</p>
 <p>We go on with the sex variable and do some summary first.</p>
-<pre class="r"><code>data %&gt;% group_by(Sex)%&gt;%
-  summarise(
-    Avg_covid_death  =mean(`COVID-19 Deaths`, na.rm= TRUE),
-    Avg_covid_proportion = mean(COVID_Death_Proportion, na.rm =TRUE)
-  )%&gt;%
-knitr::kable()</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -484,23 +408,13 @@ knitr::kable()</code></pre>
 death cases but their proportion of death are similar. For deeper
 analysis, we use stat_summay to examine mean death cases by sex with
 standard deviation error bars.</p>
-<pre class="r"><code>  data[!is.na(`COVID-19 Deaths`)]%&gt;%
-  ggplot(mapping = aes(x= `Sex`, y= `COVID-19 Deaths` ))+
-  stat_summary(fun.data = mean_sdl, geom= &quot;pointrange&quot;)+
-  stat_summary(fun.data = mean_sdl, geom= &quot;errorbar&quot;)+ggtitle(&quot;Summary Statistics of Covid-19 Death by Sex&quot;)</code></pre>
-<p><img src="midterm_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
+<p><img src="midterm_files/figure-html/unnamed-chunk-10-1.png" width="672" /></p>
 <p>The plots show that the male group, which holds a higher average case
 number, has a wider range of bars. In this case, they also have a larger
 standard deviation in death cases caused by Covid-19.</p>
 <p>The next step is states, we build up a summary table for average
 death cases and proportion by the state like before and arrange it by
 descending order of cases. Texas has the most number of cases.</p>
-<pre class="r"><code>data %&gt;% group_by(State)%&gt;%
-  summarise(
-    Avg_covid_death  =mean(`COVID-19 Deaths`, na.rm= TRUE),
-    Avg_covid_proportion = mean(COVID_Death_Proportion, na.rm =TRUE)
-  )%&gt;%arrange(desc(Avg_covid_death))%&gt;%
-knitr::kable()</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -785,10 +699,7 @@ knitr::kable()</code></pre>
 <p>To make it more clear, a bar chart is shown below. In this figure,
 Texas and California have the longest bar and Vermont has the
 shortest.</p>
-<pre class="r"><code>subset &lt;- data[!(State == &quot;United States&quot;)]
-subset[!is.na(`COVID-19 Deaths`)]%&gt;%
-  ggplot(aes(x= `COVID-19 Deaths`, y=fct_reorder(State, `COVID-19 Deaths`)))+geom_col(width = 0.5)+ggtitle(&quot;Bar Plots of Covid-19 Death by State&quot;)</code></pre>
-<p><img src="midterm_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
+<p><img src="midterm_files/figure-html/unnamed-chunk-12-1.png" width="672" /></p>
 <p>Have a look at age groups. Repeat the same actions to average Covid
 deaths and proportions and arrange them by descending order of covid
 death. It is noticeable that the cases number increases with age
@@ -796,12 +707,6 @@ increasing. The older the age group, the larger number of deaths caused
 by Covid-19. We also noticed the proportion increase, it is feasible to
 find a correlation later but it may also relate to some other
 reasons.</p>
-<pre class="r"><code>data %&gt;% group_by(`Age Group`)%&gt;%
-  summarise(
-    Avg_covid_death  =mean(`COVID-19 Deaths`, na.rm= TRUE),
-    Avg_covid_proportion = mean(COVID_Death_Proportion, na.rm =TRUE)
-  )%&gt;%arrange(desc(Avg_covid_death))%&gt;%
-knitr::kable()</code></pre>
 <table>
 <thead>
 <tr class="header">
@@ -900,43 +805,23 @@ knitr::kable()</code></pre>
 </table>
 <p>Perform a bar chart again to show the trend. The number of Covid-19
 deaths among older age groups is much higher than among younger age
-groups, and there is a trend of increasing with age.</p>
-<pre class="r"><code>subset2 &lt;- data[!(`Age Group` == &quot;All Ages&quot;)]
-subset2[!is.na(`COVID-19 Deaths`)]%&gt;%
-  ggplot(aes(x= `COVID-19 Deaths`, y=fct_reorder(`Age Group`, `COVID-19 Deaths`)))+geom_col(width = 0.7)+ggtitle(&quot;Bar Plots of Covid-19 Death by Age Groups&quot;)</code></pre>
-<p><img src="midterm_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
+groups, and there is a trend of increasing with age.
+<img src="midterm_files/figure-html/unnamed-chunk-14-1.png" width="672" /></p>
 <p>We can also do some correlation analysis. The figure below shows the
 trending between the proportion of death caused by covid and the covid
 death cases. The color indicates the sex group. Different colors
 represent different sex. From the line, we cannot have a specific
 conclusion about the correlation.</p>
-<pre class="r"><code>data[!is.na(Sex)]%&gt;%
-  ggplot(mapping = aes(x=data$`COVID-19 Deaths`, y= data$COVID_Death_Proportion))+ geom_point(mapping = aes(color= Sex))+geom_smooth()+ggtitle(&quot;Plot for Covid-Proportion and Covid-Cases&quot;)</code></pre>
 <pre><code>## `geom_smooth()` using method = &#39;gam&#39; and formula &#39;y ~ s(x, bs = &quot;cs&quot;)&#39;</code></pre>
-<pre><code>## Warning: Removed 43367 rows containing non-finite values (stat_smooth).</code></pre>
-<pre><code>## Warning: Removed 43367 rows containing missing values (geom_point).</code></pre>
-<p><img src="midterm_files/figure-html/unnamed-chunk-17-1.png" width="672" /></p>
-<pre class="r"><code>data%&gt;%
-  ggplot(mapping = aes(x= `COVID-19 Deaths`, y=`COVID_Death_Proportion`))+geom_point(mapping = aes(color= `Age Group`))+geom_smooth(method=lm, mapping = aes(linetype= `Age Group`))+facet_wrap(~`Age Group`, nrow=5)+ggtitle(&quot;Plots for Age Group, Deaths and Proportion&quot;)</code></pre>
+<p><img src="midterm_files/figure-html/unnamed-chunk-15-1.png" width="672" /></p>
 <pre><code>## `geom_smooth()` using formula &#39;y ~ x&#39;</code></pre>
-<pre><code>## Warning: Removed 43367 rows containing non-finite values (stat_smooth).</code></pre>
-<pre><code>## Warning: Removed 43367 rows containing missing values (geom_point).</code></pre>
-<p><img src="midterm_files/figure-html/unnamed-chunk-18-1.png" width="672" /></p>
+<p><img src="midterm_files/figure-html/unnamed-chunk-16-1.png" width="672" /></p>
 <p>This figure is another exploration of correlation by age groups. It
 indicates that among the older age groups, there might be a correlation
 between death cases and proportions. Future research is required on
 these questions.</p>
 <p>At last, we do some summary about other integer variables. Just for
 your information</p>
-<pre class="r"><code>s1 &lt;- summary(data$&#39;COVID-19 Deaths&#39;)
-s2 &lt;- summary(data$`Total Deaths`)
-s3 &lt;- summary(data$`Pneumonia Deaths`)
-s4 &lt;- summary(data$`Pneumonia and COVID-19 Deaths`)
-s5 &lt;- summary(data$`Influenza Deaths`)
-s6 &lt;- summary(data$`Pneumonia, Influenza, or COVID-19 Deaths`)
-s7 &lt;- summary(data$COVID_Death_Proportion)
-rbind(s1, s2, s3, s4, s5, s6, s7)%&gt;%
-knitr::kable()</code></pre>
 <table>
 <colgroup>
 <col width="4%" />
