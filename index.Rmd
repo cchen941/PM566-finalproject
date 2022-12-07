@@ -1,5 +1,5 @@
 ---
-title: "PM566 Final Project"
+title: "COVID-19 Death Cases Analysis by Date, State, and Age Groups"
 author: "Chen Chen"
 output: 
     html_document:
@@ -25,7 +25,7 @@ library(dplyr)
 library(plotly)
 library(DT)
 library(knitr)
-data <- data.table::fread("Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
+data <- data.table::fread("data/Provisional_COVID-19_Deaths_by_Sex_and_Age.csv")
 
 # Initialize code chunk options
 opts_chunk$set(
@@ -57,106 +57,68 @@ As we know, most people infected with COVID-19 will experience mild to moderate 
 
 The objective of this project is to explore the answer to questions below: 
 
+Do COVID-19 death cases decrease by date?
 
-* Does the number of COVID-19 deaths change by date? 
+Do COVID-19 death cases vary by state, sex, age groups?
 
+<br>
 
-* Does the COVID-19 death cases change over date in different states?
+## Interacitve Tables and Visualizations
+### Line Plot of Covid-19 Deaths by Date
 
-
-* Does the number of COVID-19 deaths vary by sex and age?
-  
-
-## Data Preparation
-
-*  Drop the irregular value.
-
-*  Filter the summary rows.
-
-*  Separate columns to make the variable clear.
-
-## Interacitve Visualizations
-
-```{r format the data, echo=FALSE, warning=FALSE}
-data1<- filter(data, Group == "By Month", State != "United States", Sex == "All Sexes", `Age Group` == "All Ages")
-data1$`End Date` <- as.Date(data1$`End Date`, format="%m/%d/%Y")
-```
-
-```{r plot1, class.source="code-r-small", echo=FALSE, warning=FALSE}
-p1 <- ggplot(data1, aes(x= `End Date`, y= `COVID-19 Deaths`, color = State)) + geom_line()+ geom_point(size= 0.5, alpha =0.5)
+```{r echo=FALSE, warning=FALSE, class.source="code-r-small"}
+data_p1 <-filter(data, Group == "By Month", State != "United States", Sex == "All Sexes", `Age Group` == "All Ages")
+data_p1$`End Date` <- as.Date(data_p1$`End Date`, format="%m/%d/%Y")
+p1 <- ggplot(data_p1, aes(x= `End Date`, y= `COVID-19 Deaths`, color = State)) + geom_line()+ geom_point(size= 0.5, alpha =0.5)+ xlab("Date")
 p1 <- ggplotly(p1)
-```
-
-```{r plot2, class.source="code-r-small", echo=FALSE, warning=FALSE}
-data2 <- data1 %>% dplyr::filter(`End Date` <= "2021-12-31")
-p2 <- ggplot(data2, aes(x= `End Date`, y= `COVID-19 Deaths`, color = State)) + geom_line()+ geom_point(size= 0.5, alpha =0.5)
-p2<-ggplotly(p2)
-```
-
-
-
-
-### Line graphs of COVID-19 deaths by dates and states.{.tabset}
-
-
-#### From Jan.2020 to Nov.2022
-```{r p1, echo=FALSE}
 p1
 ```
 
-#### Focus on 2020-2021
-```{r p2, echo=FALSE} 
+
+The first chart is the line plot of Covid-19 death cases by date. The range of the date is from January 2020 to November 2022. The different color here in the plot represents the different state. By this, we can find out distribution by date among states as well. From the chart, We can find that from 2020 to 2022, the overall number of deaths shows a trend of increasing first and then decreasing. The data peaks in early 2021, and the recent death data (end of 2022) is much smaller than the data when the virus just come out to spread (2020). It indicates that the death rate from Covid-19 has been greatly reduced. From the perspective of states, the area with the largest number of deaths in 2020 in New York City. It is noticed that blue lines are at higher levels, referring to the vicinity of New York State. After entering 2021, California's data began to rise rapidly and reached the highest peak. At the end of 2021, there is a decline in CA, and the peaks become Florida and Texas.
+
+<br>
+
+### Bar Chart of Covid-19 Deaths by Age Groups
+
+```{r echo=FALSE, warning=FALSE, class.source="code-r-small"}
+p2<-data_clean%>%
+ggplot(aes(x=`COVID-19 Deaths`, y=fct_reorder(`Age Group`, `COVID-19 Deaths`),fill=Sex))+ geom_col(position= "dodge")+ ylab("Age Groups")
+p2 <- ggplotly(p2)
 p2
 ```
-## {-}
+
+
+From the chart,the number of death cases shows an apparent increasing trend with increasing age. It is worth mentioning that the bars of different colors in the figure refer to different genders: blue represents males, and red represents females. From the chart, except for the two age groups 55-64 and over 85, most of the other groups have more male deaths than females. This is a gender-related result that can be reflected in this graph.
+
+<br>
+
+### Histogram of Covid-19 Deaths Counts under 250
+```{r echo=FALSE, warning=FALSE, class.source="code-r-small"}
+data_p3 <- data_clean[`COVID-19 Deaths`<250]
+data_p3 <- data_p3[`COVID-19 Deaths`>0]
+p3<- data_p3%>% ggplot(aes(x=`COVID-19 Deaths`, fill=Sex))+ geom_histogram(position= "dodge",binwidth = 5)
+p3 <- ggplotly(p3)
+p3
+```
+For sex groups analysis, the next figure is one histogram of death cases colored by gender. The figure only shows the data with the count of death cases below 250. Because after observing the dataset, most of the observations are below 250. In this case, the distribution of gender classification can be indicated more intuitively. It can be clearly seen from the histogram that most of the observations for death cases under 250 have more males than females. Combining the above visualization results, we can conclude that in the three-year Covid-19 death data from 2020 to 2022, there are more males than females.
 
 <br>
 
 
-The first chart is the line graph of COVID-19 deaths by dates throughout 3 years. It can be clearly seen from the figure that death cases increased in 2020-2021, and began to decrease after 2021. For each year, the change in death cases is cyclical, with the highest point appearing in January 2021.
-
-
-The second chart focuses on the 2020-2021 year, with more death cases in this stage and we can also take a closer look at the distribution by different states. It is shown that by July 2020, the peak of death cases mainly occurred near New York State. However, by entering 2021, the death cases in California began to increase rapidly and reached the highest peak. After July 2021, Florida became the state with the largest number of deaths although the overall number of deaths cases decline.
+### Scatter Plot of Covid-19 Deaths by Total Deaths
+```{r echo=FALSE, warning=FALSE, class.source="code-r-small"}
+data_clean%>%
+  plot_ly(x= ~`COVID-19 Deaths`, y= ~`Total Deaths`, 
+          type = 'scatter',
+          mode = 'markers',
+          color = ~State,
+          marker = list(sizemode = 'sex', opacity= 0.5))
+```
+This plot shows the relationship between the number of Covid-19 deaths and the total number of deaths. It is not difficult to find that these two variables have a certain degree of correlation. With the increase in the total deaths, number of deaths from Covid-19 is close to linear growth. From the perspective of states, this interactive plot helps show those outlier data points.
 
 <br>
 
-```{r echo=FALSE, warning=FALSE}
-data3<- filter(data, Group == "By Total",State != "United States", Sex != "All Sexes", `Age Group` != "All Ages", `COVID-19 Deaths` < 1000, `COVID-19 Deaths` > 0)
-```
+## Conclusion and Summary
+During these three years, the number of Covid-19 deaths has fluctuated, showing an increasing trend until the beginning of 2021 and starting to decline significantly thereafter; For the data of each state, California, Texas, and Florida have the top three most total Covid-19 death data. New York City, California, and Florida have all reached the highest level among states at different times; The Covid-19 death cases increase by age group, with higher age groups having more deaths; In terms of gender, most of the total number and proportion of Covid-19 deaths in the male group is higher the female group.
 
-
-### Exploration of the relationship between death cases and sex&age.
-
-
-#### Histogrom of Death Cases under 250
-```{r echo=FALSE, warning=FALSE}
-p3 <- data3 %>% ggplot(aes(x=`COVID-19 Deaths`, fill=Sex))+ geom_histogram(binwidth = 10)
-ggplotly(p3)
-```
-
-
-The first chart shows the histogram distributions for death cases under 1000. It shows that most of the counts are under 250 cases. I differentiate gender in each histogram by color, but from the graph, I can't find an apparent regulation that the number of death cases is related to gender.
-
-
-
-#### Barchart of Death Cases by Age Groups
-```{r echo=FALSE, warning=FALSE}
-data4<- filter(data, Group == "By Total",State != "United States", Sex != "All Sexes", `Age Group` != "All Ages", `COVID-19 Deaths` > 0, `Age Group` != "Under 1 year", `Age Group` != "0-17 years")
-p4<-data4 %>% 
-ggplot(aes(x=`COVID-19 Deaths`,y=`Age Group`,fill=Sex))+ geom_col(position= "dodge")
-ggplotly(p4)
-```
-
-The second figure is the bar chart of death cases by age group, also colored by sex. It can be seen from this figure that the number of death cases shows an apparent increasing trend with the increasing age. In most age groups (except those over 85 years old), the number of deaths of male is more than that of female.
-
-## Some Discussion
-
-
-  * How to analyze the gender factor more effectively?
-  
-  
-  * Try more interactive plots like map,scatter,heat map. Perform interactive tables. 
-  
-  
-  
-  

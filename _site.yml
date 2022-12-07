@@ -5,8 +5,8 @@ navbar:
   left:
     - text: "Home"
       href: index.html
-    - text: "Midterm Output"
-      href: midterm.html
+    - text: "Appendix"
+      href: Appendix.html
   right:
     - icon: fa-github fa-lg
       href: https://github.com/USCbiostats/PM566

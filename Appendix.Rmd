@@ -1,0 +1,65 @@
+---
+title: "Appendix"
+output: html_document
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+```
+
+# Reference List
+
+[1]World Health Organizations, https://www.who.int/health-topics/coronavirus#tab=tab_1.
+
+
+[2]Centers for Disease Control and Prevention, https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku.
+
+
+[3]Centers for Disease Control and Prevention, https://www.cdc.gov/nchs/covid19/covid-19-mortality-data-files.htm
+
+
+<br>
+
+
+# Interactive Tables for Months
+
+## 2020 Data
+```{r message=FALSE, echo=FALSE, warning=FALSE}
+library(DT)
+library(dplyr)
+t1<-data_clean %>% group_by(Month)%>%filter(Year == 2020)%>%
+  summarise(
+    Total_Death_Cases = sum(`COVID-19 Deaths`, na.rm= TRUE),
+    Avg_Death_Cases   = mean(`COVID-19 Deaths`, na.rm= TRUE), 
+    Min_Death_Cases   = min(`COVID-19 Deaths`, na.rm= TRUE),
+    Max_Death_Cases   = max(`COVID-19 Deaths`, na.rm= TRUE)
+  )
+t1[3] <- round(t1$Avg_Death_Cases, digits = 0)
+datatable(t1)
+```
+
+## 2021 Data
+```{r echo=FALSE, warning=FALSE}
+t2<-data_clean %>% group_by(Month)%>%filter(Year == 2021)%>%
+  summarise(
+    Total_Death_Cases = sum(`COVID-19 Deaths`, na.rm= TRUE),
+    Avg_Death_Cases   = mean(`COVID-19 Deaths`, na.rm= TRUE), 
+    Min_Death_Cases   = min(`COVID-19 Deaths`, na.rm= TRUE),
+    Max_Death_Cases   = max(`COVID-19 Deaths`, na.rm= TRUE)
+  )
+t2[3] <- round(t2$Avg_Death_Cases, digits = 0)
+datatable(t2)
+```
+
+## 2022 Data
+```{r echo=FALSE, warning=FALSE}
+t3<-data_clean %>% group_by(Month)%>%filter(Year == 2022)%>%
+  summarise(
+    Total_Death_Cases = sum(`COVID-19 Deaths`, na.rm= TRUE),
+    Avg_Death_Cases   = mean(`COVID-19 Deaths`, na.rm= TRUE), 
+    Min_Death_Cases   = min(`COVID-19 Deaths`, na.rm= TRUE),
+    Max_Death_Cases   = max(`COVID-19 Deaths`, na.rm= TRUE)
+  )
+t3[3] <- round(t3$Avg_Death_Cases, digits = 0)
+datatable(t3)
+```
