@@ -1,7 +1,7 @@
 name: "my-website"
 output_dir: "."
 navbar:
-  title: "PM566 Final Project"
+  title: "OVID-19 Death Cases Analysis by Date, State, Sex and Age Groups"
   left:
     - text: "Home"
       href: index.html

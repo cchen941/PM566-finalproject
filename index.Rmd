@@ -1,5 +1,5 @@
 ---
-title: "COVID-19 Death Cases Analysis by Date, State, Sex and Age Groups
+title: "COVID-19 Death Cases Analysis by Date, State, Sex and Age Groups"
 author: "Chen Chen"
 output: 
     html_document:
@@ -50,6 +50,15 @@ opts_chunk$set(
   ize: 10px;
 }
 ```
+
+
+```{r echo=FALSE, warning= FALSE}
+data_clean <- select(data, 3:11)
+data_clean <- filter(data_clean, Group == "By Month", State != "United States", Sex != "All Sexes", `Age Group` != "All Ages")
+data_clean <- data_clean[!is.na(`COVID-19 Deaths`)]
+data_clean <- data_clean[!is.na(`Total Deaths`)]
+```
+
 
 ## Brief Description
 As we know, most people infected with COVID-19 will experience mild to moderate respiratory illness and recover without requiring special treatment. However, some will become seriously ill or die at any age. The data set of this project is from CDC (Centers for Disease Control and Prevention) and talks about provisional COVID-19 deaths in United States by date, state, sex and age groups.
