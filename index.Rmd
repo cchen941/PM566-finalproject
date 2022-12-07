@@ -1,5 +1,5 @@
 ---
-title: "COVID-19 Death Cases Analysis by Date, State, Sex and Age Groups"
+title: "COVID-19 Death Cases Analysis by Date, State, Sex and Age Group"
 author: "Chen Chen"
 output: 
     html_document:
@@ -8,8 +8,10 @@ output:
 ---
 
 
-This is PM566 final project website. 
-Click to [Download the Report](https://github.com/cchen941/PM566-finalproject/blob/main/final_report/FinalReport.pdf)
+Link to my [Report](https://github.com/cchen941/PM566-finalproject/blob/main/final_report/FinalReport.pdf)
+
+
+Click to [Download the Report](https://github.com/cchen941/PM566-finalproject/raw/main/final_report/FinalReport.pdf)
 
 
 Click to [View the Dataset](https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku)
@@ -68,7 +70,7 @@ The objective of this project is to explore the answer to questions below:
 
 Do COVID-19 death cases decrease by date?
 
-Do COVID-19 death cases vary by state, sex, age groups?
+Do COVID-19 death cases vary by state, sex, abd age group?
 
 <br>
 
