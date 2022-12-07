@@ -9,7 +9,7 @@ output:
 
 
 This is PM566 final project website. 
-Click to [Download the Report](https://github.com/cchen941/PM566-finalproject/blob/main/FinalReport.pdf)
+Click to [Download the Report](https://github.com/cchen941/PM566-finalproject/blob/main/final_report/FinalReport.pdf)
 
 
 Click to [View the Dataset](https://data.cdc.gov/NCHS/Provisional-COVID-19-Deaths-by-Sex-and-Age/9bhg-hcku)

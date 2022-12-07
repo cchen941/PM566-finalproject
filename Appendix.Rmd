@@ -3,10 +3,6 @@ title: "Appendix"
 output: html_document
 ---
 
-```{r setup, include=FALSE}
-knitr::opts_chunk$set(echo = TRUE)
-```
-
 # Reference List
 
 [1]World Health Organizations, https://www.who.int/health-topics/coronavirus#tab=tab_1.
@@ -24,9 +20,23 @@ knitr::opts_chunk$set(echo = TRUE)
 # Interactive Tables for Months
 
 ## 2020 Data
-```{r message=FALSE, echo=FALSE, warning=FALSE}
+```{r setup, message=FALSE, echo=FALSE, warning=FALSE}
 library(DT)
 library(dplyr)
+# Initialize code chunk options
+opts_chunk$set(
+  warning = FALSE,
+  message = FALSE,
+  eval=TRUE,
+  echo = TRUE,
+  cache = FALSE,
+  fig.width = 7,
+  fig.align = 'center',
+  fig.asp = 0.618,
+  out.width = "700px")
+```
+
+```{r echo=FALSE, warning=FALSE}
 t1<-data_clean %>% group_by(Month)%>%filter(Year == 2020)%>%
   summarise(
     Total_Death_Cases = sum(`COVID-19 Deaths`, na.rm= TRUE),
