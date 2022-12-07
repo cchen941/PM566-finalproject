@@ -1,5 +1,5 @@
 ---
-title: "COVID-19 Death Cases Analysis by Date, State, and Age Groups"
+title: "COVID-19 Death Cases Analysis by Date, State, Sex and Age Groups"
 author: "Chen Chen 6381370662"
 date: "`r Sys.Date()`"
 output: pdf_document
