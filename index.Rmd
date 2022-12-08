@@ -63,7 +63,7 @@ data_clean <- data_clean[!is.na(`Total Deaths`)]
 
 
 ## Brief Description
-As we know, most people infected with COVID-19 will experience mild to moderate respiratory illness and recover without requiring special treatment. However, some will become seriously ill or die at any age. The data set of this project is from CDC (Centers for Disease Control and Prevention) and talks about provisional COVID-19 deaths in United States by date, state, sex and age groups.
+As we know, most people infected with COVID-19 will experience mild to moderate respiratory illness and recover without requiring special treatment. However, some will become seriously ill or die at any age. The data set of this project is from CDC (Centers for Disease Control and Prevention) and talks about provisional COVID-19 deaths in the United States by date, state, sex, and age groups.
 
 
 The objective of this project is to explore the answer to questions below: 
@@ -74,7 +74,7 @@ Do COVID-19 death cases vary by state, sex, abd age group?
 
 <br>
 
-## Interacitve Tables and Visualizations
+## Interactive Tables and Visualizations
 ### Line Plot of Covid-19 Deaths by Date
 
 ```{r echo=FALSE, warning=FALSE, class.source="code-r-small"}
@@ -100,7 +100,7 @@ p2
 ```
 
 
-From the chart,the number of death cases shows an apparent increasing trend with increasing age. It is worth mentioning that the bars of different colors in the figure refer to different genders: blue represents males, and red represents females. From the chart, except for the two age groups 55-64 and over 85, most of the other groups have more male deaths than females. This is a gender-related result that can be reflected in this graph.
+From the chart, the number of death cases shows an apparent increasing trend with increasing age. It is worth mentioning that the bars of different colors in the figure refer to different genders: blue represents males, and red represents females. From the chart, except for the two age groups 55-64 and over 85, most of the other groups have more male deaths than females. This is a gender-related result that can be reflected in this graph.
 
 <br>
 
@@ -126,6 +126,7 @@ data_clean%>%
           color = ~State,
           marker = list(sizemode = 'sex', opacity= 0.5))
 ```
+
 This plot shows the relationship between the number of Covid-19 deaths and the total number of deaths. It is not difficult to find that these two variables have a certain degree of correlation. With the increase in the total deaths, number of deaths from Covid-19 is close to linear growth. From the perspective of states, this interactive plot helps show those outlier data points.
 
 <br>
