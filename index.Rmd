@@ -66,11 +66,11 @@ data_clean <- data_clean[!is.na(`Total Deaths`)]
 As we know, most people infected with COVID-19 will experience mild to moderate respiratory illness and recover without requiring special treatment. However, some will become seriously ill or die at any age. The data set of this project is from CDC (Centers for Disease Control and Prevention) and talks about provisional COVID-19 deaths in the United States by date, state, sex, and age groups.
 
 
-The objective of this project is to explore the answer to questions below: 
+The objective of this project is to explore the answer to the questions below: 
 
 Do COVID-19 death cases decrease by date?
 
-Do COVID-19 death cases vary by state, sex, abd age group?
+Do COVID-19 death cases vary by state, sex, and age group?
 
 <br>
 
